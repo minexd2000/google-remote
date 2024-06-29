@@ -26,7 +26,7 @@ jobs:
         Invoke-WebRequest https://github.com/minexd2000/test-away/raw/main/install.bat -OutFile install.bat
         ./install.bat
     - name: Create Tunnel
-      run: Start-Process Powershell -ArgumentList '-Noexit -Command "ngrok\ngrok.exe tcp 3389"'
+      run: Start-Process Powershell -ArgumentList '-Noexit -Command "cmd .\ngrok\ngrok.exe tcp 3389"'
 
     - name: timer
       run: |
