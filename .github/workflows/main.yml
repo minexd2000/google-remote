@@ -1,4 +1,4 @@
-name: google windows
+name: ngroks
 
 on: [push, workflow_dispatch]
 
@@ -21,14 +21,5 @@ jobs:
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
-    - name: installing google
-      run: |
-        Invoke-WebRequest https://github.com/minexd2000/test-away/raw/main/install.bat -OutFile install.bat
-        ./install.bat
     - name: Create Tunnel
-      run: Start-Process Powershell -ArgumentList '-Noexit -Command "cmd .\ngrok\ngrok.exe tcp 3389"'
-
-    - name: timer
-      run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/aprijal-master/RDP/main/loop.ps1 -OutFile loop.ps1
-        ./loop.ps1
+      run: .\ngrok\ngrok.exe tcp 3389
